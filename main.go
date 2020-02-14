@@ -5,6 +5,8 @@ import (
 	"crypto/rsa"
 	"crypto/x509"
 	"encoding/pem"
+	"fmt"
+	"io/ioutil"
 	"log"
 )
 
@@ -39,4 +41,13 @@ func exportToPEM(privateKey *rsa.PrivateKey, publicKey *rsa.PublicKey) (privateP
 	publicPEM = string(publicPEMBytes)
 
 	return privatePEM, publicPEM
+}
+
+func writeFile(content []byte, fileName string) {
+	filePath := fmt.Sprintf("%s", fileName)
+
+	err := ioutil.WriteFile(filePath, content, 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
