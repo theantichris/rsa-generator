@@ -11,7 +11,12 @@ import (
 )
 
 func main() {
+	privateKey, publicKey := generateKeyPair(2048)
 
+	privatePEM, publicPEM := exportToPEM(privateKey, publicKey)
+
+	writeFile([]byte(privatePEM), "private.pem")
+	writeFile([]byte(publicPEM), "public.pem")
 }
 
 func generateKeyPair(size int) (privateKey *rsa.PrivateKey, publicKey *rsa.PublicKey) {
